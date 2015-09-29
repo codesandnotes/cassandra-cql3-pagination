@@ -1,0 +1,4 @@
+/.project
+/.idea/
+/cassandra-cql3-pagination.iml
+/target/
