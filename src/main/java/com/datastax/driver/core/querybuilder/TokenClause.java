@@ -1,15 +1,14 @@
 package com.datastax.driver.core.querybuilder;
 
 import java.util.List;
-import java.util.UUID;
 
-public class UUIDTokenClause extends Clause {
+public class TokenClause extends Clause {
 
     private final String name;
     private final String operation;
-    private final UUID value;
+    private final Object value;
 
-    public UUIDTokenClause(String name, String operation, UUID value) {
+    public TokenClause(String name, String operation, Object value) {
         super();
         this.name = name;
         this.operation = operation;
