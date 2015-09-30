@@ -36,14 +36,13 @@ public class SimpleStringPrimaryKeyTest extends Integration {
         String lastIdInPage1 = page1.get(4).getString("id");
 
         List<Row> page2 = embeddedCassandra.session().execute(
-                "select * from cql3_pagination.simple_string_pk where token(id) > token('" + lastIdInPage1 + "')"
+                "select * from cql3_pagination.simple_string_pk where token(id) > token('" + lastIdInPage1 + "') limit 5"
         ).all();
         print("page 2:", page2);
 
         Assert.assertEquals(5, page2.size());
         Assert.assertNotEquals(page2.get(0).getString("id"), page1.get(0).getString("id"));
     }
-
 
     @Test
     public void retrieve_5_ResultsOfPage_2_InAListOf_10_UsingQueryBuilder() {
@@ -54,10 +53,9 @@ public class SimpleStringPrimaryKeyTest extends Integration {
 
         String lastIdInPage1 = page1.get(4).getString("id");
 
-        Select query = QueryBuilder.select().from(CASSANDRA_KEYSPACE, TABLE)
-                .where(new TokenClause("id", ">", lastIdInPage1)).limit(5);
         List<Row> page2 = embeddedCassandra.session().execute(
-                query
+                QueryBuilder.select().from(CASSANDRA_KEYSPACE, TABLE)
+                        .where(new TokenClause("id", ">", lastIdInPage1)).limit(5)
         ).all();
         print("page 2:", page2);
 
