@@ -26,11 +26,6 @@ public class CompoundPrimaryKeyTest extends Integration {
     }
 
     @Test
-    public void wtf() {
-        print("", embeddedCassandra.session().execute("select * from cql3_pagination.compound_pk").all());
-    }
-
-    @Test
     public void retrieve_5_ResultsOfPage_2_InAListOf_10_UsingCQL() {
         List<Row> page1 = embeddedCassandra.session().execute(
                 QueryBuilder.select().from(CASSANDRA_KEYSPACE, TABLE).limit(5)
