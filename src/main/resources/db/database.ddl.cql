@@ -12,7 +12,8 @@ create table if not exists cql3_pagination.simple_string_pk (
 );
 
 create table if not exists cql3_pagination.compound_pk (
-  country text,
-  user text,
-  primary key (country, user)
+  book text,
+  line int,
+  content text,
+  primary key (book, line)
 );
